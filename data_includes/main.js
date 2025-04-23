@@ -26,28 +26,28 @@ newTrial("instructions",
         .center()
         .print()
         .wait()
-)
 
-newTrial("experiment-trial",
-    newAudio("napkin", "napkin.wav")
-        .play()
-    ,
-    newText("fix", "+") // create a fixation cross
-        .css("font-size","80px")
-        .print("center at 50%" , "center at 50%")
-        .log()
-    ,
-    newKey("resp", "FJ")
-        .log()
-        .wait()
-    ,
-    //newText("instr", "(Press 'a' for 'same' and 'l' for 'different')")
-    //    .center()
-    //    .print()
-    //,
-    getAudio("napkin")
-        .wait("first")
-    ,
-    getText("fix")
-        .text("Press 'a' for 'same' and 'l' for 'different'")
+)
+Template("items.csv", row =>
+    newTrial("experimental-trial",
+        newAudio("audio", row.masked)
+            .play()
+        ,
+        newText("fix", "+") // create a fixation cross
+            .css("font-size","80px")
+            .print("center at 50%" , "center at 50%")
+            .log()
+        ,
+        newKey("resp", "FJ")
+            .log()
+            .wait()
+        ,
+        //newText("instr", "(Press 'a' for 'same' and 'l' for 'different')")
+        //    .center()
+        //    .print()
+        //,
+        getAudio("audio")
+            .wait("first")
+    )
+    .log("gold", row.AX)
 )
